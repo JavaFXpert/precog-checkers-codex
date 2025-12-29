@@ -66,14 +66,20 @@ function applyAIMove(m: any) {
     const path = m.pv[0].path as number[];
     board.setPrecog(path);
   }
-  // Apply best move locally
-  const nextPos = applyMoveLocal(pos, m.move);
-  addMoveToList(m.move);
-  pos = nextPos;
-  board.setPosition(pos);
-  worker.postMessage({ type: 'setpos', pos });
-  updateStatus();
-  searching = false;
+  // Flash the moving piece briefly before applying the move
+  const fromIdx = m.move.from as number;
+  board.flashPiece(fromIdx);
+  window.setTimeout(() => {
+    board.clearFlash();
+    // Apply best move locally
+    const nextPos = applyMoveLocal(pos, m.move);
+    addMoveToList(m.move);
+    pos = nextPos;
+    board.setPosition(pos);
+    worker.postMessage({ type: 'setpos', pos });
+    updateStatus();
+    searching = false;
+  }, 700);
 }
 
 function addMoveToList(m: Move) {

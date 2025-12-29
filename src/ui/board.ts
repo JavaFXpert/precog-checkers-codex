@@ -15,6 +15,7 @@ export class BoardView {
   private callbacks: BoardCallbacks;
   private precogSquares: Set<number> = new Set();
   private humanSide: Side = WHITE;
+  private flashIdx: number | null = null;
 
   constructor(container: HTMLElement, callbacks: BoardCallbacks) {
     this.el = container;
@@ -47,6 +48,16 @@ export class BoardView {
     this.refreshHighlights();
   }
 
+  flashPiece(idx: number) {
+    this.flashIdx = idx;
+    this.refresh();
+  }
+
+  clearFlash() {
+    this.flashIdx = null;
+    this.refresh();
+  }
+
   private renderBase() {
     this.el.innerHTML = '';
     for (let r = 0; r < 8; r++) {
@@ -75,6 +86,7 @@ export class BoardView {
       const p = document.createElement('div');
       p.className = `piece ${piece.side === WHITE ? 'white' : 'black'} ${piece.king ? 'king' : ''}`;
       p.dataset.idx = String(i);
+      if (this.flashIdx === i) p.classList.add('flash');
       cell.appendChild(p);
     }
     this.refreshHighlights();
