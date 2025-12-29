@@ -86,6 +86,13 @@ export class BoardView {
       const p = document.createElement('div');
       p.className = `piece ${piece.side === WHITE ? 'white' : 'black'} ${piece.king ? 'king' : ''}`;
       p.dataset.idx = String(i);
+      if (piece.king) {
+        const crown = document.createElement('span');
+        crown.className = 'crown';
+        crown.innerHTML =
+          "<svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' focusable='false'><path d='M8 46 L16 20 L24 34 L32 18 L40 34 L48 20 L56 46 Z' fill='#00E5FF'/><rect x='12' y='46' width='40' height='6' rx='2' fill='#00E5FF'/></svg>";
+        p.appendChild(crown);
+      }
       if (this.flashIdx === i) p.classList.add('flash');
       cell.appendChild(p);
     }

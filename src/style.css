@@ -101,22 +101,20 @@ h1 {
   position: relative;
 }
 .piece.king::before { content: none; }
-.piece.king::after {
-  /* crown icon overlay */
-  content: '';
+.piece .crown {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 62%;
-  height: 62%;
   transform: translate(-50%, -50%);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
   pointer-events: none;
+  display: block;
   filter: drop-shadow(0 0 8px rgba(0,229,255,0.6)) drop-shadow(0 0 16px rgba(0,229,255,0.35));
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M8 46 L16 20 L24 34 L32 18 L40 34 L48 20 L56 46 Z' fill='%2300E5FF'/%3E%3Crect x='12' y='46' width='40' height='6' rx='2' fill='%2300E5FF'/%3E%3C/svg%3E");
-  opacity: 0.95;
+}
+.piece .crown svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .piece.flash {
   animation: piece-glow 1400ms ease-in-out 0s 1 both;
