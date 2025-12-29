@@ -33,3 +33,44 @@
 ## Agent-Specific Notes (Codex CLI)
 - Prefer small, focused patches; use `rg` for search. When a task maps to a skill, open its `SKILL.md` and follow the provided workflow and scripts. Keep context minimal and reuse templates/assets where available.
 
+## GitHub Pages Deployment Playbook
+- Base path: For repo pages, always build with `--base=/${REPO_NAME}/`. If you need a permanent setting, set `base` in `vite.config.ts`.
+- Assets that respect base: import CSS in your entry (`import './style.css'`) and create workers via `new Worker(new URL('./worker.ts', import.meta.url), { type: 'module' })`. Do not use root-absolute paths like `/src/style.css`.
+- Lockfile and install: commit `package-lock.json` and prefer `npm ci` in CI; fall back to `npm install` only if the lockfile is intentionally absent.
+- Ignore bloat: ensure `.gitignore` excludes `node_modules/` and `dist/`.
+- Router note: if using a client router, add a `404.html` that serves the SPA (copy of `index.html`); not needed for this app.
+- Visibility: Pages status APIs require a public repo (or a scoped token). If private, report status via the Actions UI instead of API polling.
+
+### Workflow (copy-paste)
+```
+name: Deploy to GitHub Pages
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci || npm install --no-audit --no-fund
+      - run: npm run build -- --base=/${{ github.event.repository.name }}/
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: ${{ steps.deployment.outputs.page_url }} }
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### Preflight Checklist
+- `package.json` has `build: "tsc -b && vite build"` and an entry file that imports CSS.
+- Web workers are created with `new URL(..., import.meta.url)`.
+- `tsconfig.json` includes `"lib": ["DOM", "WebWorker", "ES2020"]`.
+- Vite base confirmed for repo pages; Settings → Pages set to “GitHub Actions”.
