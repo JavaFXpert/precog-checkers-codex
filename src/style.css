@@ -91,6 +91,7 @@ h1 {
   place-items: center;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.06), inset 0 10px 25px rgba(255,255,255,0.08), 0 0 30px rgba(0,229,255,0.25);
   transition: transform 130ms ease, box-shadow 130ms ease;
+  will-change: transform, box-shadow, filter;
 }
 .piece.white { background: radial-gradient(circle at 30% 25%, #e6faff, #9ed7e4 70%); }
 .piece.black { background: radial-gradient(circle at 30% 25%, #7fb1bf, #3c6a79 70%); }
@@ -99,23 +100,28 @@ h1 {
   box-shadow: 0 0 0 1px rgba(255,255,255,0.08), inset 0 0 20px rgba(0,229,255,0.35), 0 0 40px rgba(0,229,255,0.35);
 }
 .piece.flash {
-  animation: piece-flash 650ms ease-in-out 0s 1 both;
+  animation: piece-glow 1400ms ease-in-out 0s 1 both;
 }
-@keyframes piece-flash {
+@keyframes piece-glow {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), inset 0 10px 25px rgba(255,255,255,0.08), 0 0 30px rgba(0,229,255,0.25);
-    outline: 0;
+    filter: drop-shadow(0 0 0 var(--cyan));
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), inset 0 10px 20px rgba(255,255,255,0.08), 0 0 22px rgba(0,229,255,0.25);
   }
-  60% {
-    transform: scale(1.06);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.12), inset 0 0 28px rgba(0,229,255,0.45), 0 0 60px rgba(0,229,255,0.55);
-    outline: 2px solid rgba(0,229,255,0.4);
+  35% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 18px var(--cyan));
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.14), inset 0 0 30px rgba(0,229,255,0.55), 0 0 70px rgba(0,229,255,0.65);
+  }
+  65% {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 8px rgba(0,229,255,0.6));
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1), inset 0 0 22px rgba(0,229,255,0.35), 0 0 40px rgba(0,229,255,0.45);
   }
   100% {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.08), inset 0 0 22px rgba(0,229,255,0.30), 0 0 36px rgba(0,229,255,0.40);
-    outline: 0;
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 14px rgba(0,229,255,0.75));
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.12), inset 0 0 26px rgba(0,229,255,0.45), 0 0 55px rgba(0,229,255,0.55);
   }
 }
 .cell.dark.highlight::before {

@@ -79,7 +79,7 @@ function applyAIMove(m: any) {
     worker.postMessage({ type: 'setpos', pos });
     updateStatus();
     searching = false;
-  }, 700);
+  }, 1500);
 }
 
 function addMoveToList(m: Move) {
