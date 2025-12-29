@@ -1,5 +1,5 @@
 import type { Move, Position, SearchLimits, Side } from './types';
-import { applyMove, generateMoves, isTerminal, other } from './position';
+import { applyMove, generateMoves, isTerminal } from './position';
 import { createZobrist } from '../lib/zobrist';
 
 type Bound = 'EXACT' | 'LOWER' | 'UPPER';

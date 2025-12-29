@@ -1,5 +1,5 @@
 import type { Position, Side } from './types';
-import { BLACK, WHITE, sidePieces } from './position';
+import { WHITE, sidePieces } from './position';
 import { popcount32 } from './bitboard';
 
 // Heuristic evaluation (centipawns, side-to-move perspective positive).
@@ -14,4 +14,3 @@ export function evaluate(pos: Position, perspective: Side): number {
   const val = (perspective === WHITE ? (materialW - materialB) : (materialB - materialW)) + tempo + mobility;
   return val;
 }
-

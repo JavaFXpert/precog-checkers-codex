@@ -1,4 +1,4 @@
-import { initialPosition, other, applyMove } from './engine/position';
+import { initialPosition, applyMove } from './engine/position';
 import type { Move, Position, Side } from './engine/types';
 import { BoardView } from './ui/board';
 import './style.css';
@@ -34,7 +34,7 @@ const board = new BoardView(boardEl, {
 function newGame() {
   pos = initialPosition();
   human = sideSel.value === 'white' ? 1 : 0;
-  ai = human ^ 1 as Side;
+  ai = (human === 1 ? 0 : 1) as Side;
   moveList.innerHTML = '';
   board.setHumanSide(human);
   board.setPosition(pos);

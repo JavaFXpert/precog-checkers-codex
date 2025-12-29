@@ -1,0 +1,1 @@
+{"root":["./src/main.ts","./src/engine/bitboard.ts","./src/engine/eval.ts","./src/engine/position.ts","./src/engine/search.ts","./src/engine/types.ts","./src/lib/random.ts","./src/lib/zobrist.ts","./src/ui/board.ts","./src/worker/engine.worker.ts","./vite.config.ts","./tests/engine.spec.ts"],"version":"5.9.3"}

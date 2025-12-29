@@ -1,5 +1,5 @@
 import type { Move, Position, Side } from '../engine/types';
-import { BLACK, WHITE, applyMove, generateMoves, initialPosition, pieceAt } from '../engine/position';
+import { WHITE, applyMove, generateMoves, initialPosition, pieceAt } from '../engine/position';
 import { coordToIndex, indexToCoord, isDark } from '../engine/bitboard';
 
 export type BoardCallbacks = {
@@ -147,4 +147,3 @@ export class BoardView {
     return this.el.children[r * 8 + c] as HTMLElement;
   }
 }
-

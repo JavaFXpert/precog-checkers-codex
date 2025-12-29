@@ -63,7 +63,6 @@ function addIfValid(occ: number, r: number, c: number): number {
 
 export function generateMoves(pos: Position): Move[] {
   const side = pos.turn;
-  const opp = other(side);
   const bm = pos.men[0], bk = pos.kings[0], wm = pos.men[1], wk = pos.kings[1];
   const occ = (bm | bk | wm | wk) >>> 0;
   const myMen = pos.men[side];
@@ -191,7 +190,6 @@ function genCapturesFrom(pos: Position, i: number, isKing: boolean, side: Side, 
 
 export function applyMove(pos: Position, m: Move): Position {
   const side = pos.turn;
-  const opp = other(side);
   let bm = pos.men[0], bk = pos.kings[0], wm = pos.men[1], wk = pos.kings[1];
   const fromMask = bit(m.from);
   const toMask = bit(m.to);

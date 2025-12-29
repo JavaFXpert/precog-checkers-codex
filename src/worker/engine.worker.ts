@@ -1,7 +1,7 @@
 /// <reference lib="webworker" />
 import type { Position, SearchLimits, Side } from '../engine/types';
 import { Searcher } from '../engine/search';
-import { applyMove, initialPosition } from '../engine/position';
+import { initialPosition } from '../engine/position';
 
 type MsgIn =
   | { type: 'setpos'; pos: Position }
@@ -34,4 +34,3 @@ onmessage = (e: MessageEvent<MsgIn>) => {
     searcher.stop();
   }
 };
-

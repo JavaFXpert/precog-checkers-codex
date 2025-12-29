@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Precog Checkers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/assets/index-piTeBsui.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-bn5GqDH6.css">
+  </head>
+  <body>
+    <div id="app">
+      <header class="glass header">
+        <h1>Precog Checkers</h1>
+        <div class="controls">
+          <label>Difficulty
+            <select id="difficulty">
+              <option value="300">Easy (0.3s)</option>
+              <option value="700" selected>Normal (0.7s)</option>
+              <option value="1500">Hard (1.5s)</option>
+              <option value="3000">Max (3s)</option>
+            </select>
+          </label>
+          <label>Side
+            <select id="side">
+              <option value="white" selected>White (You)</option>
+              <option value="black">Black (You)</option>
+            </select>
+          </label>
+          <button id="newGame">New Game</button>
+          <button id="hint">Hint</button>
+          <label class="toggle">
+            <input type="checkbox" id="precog" checked />
+            <span>Precog Mode</span>
+          </label>
+        </div>
+      </header>
+      <main class="board-wrap">
+        <div id="board" class="board" aria-label="Checkers board" role="grid"></div>
+        <aside class="sidebar glass">
+          <div class="status"><span id="statusText">White to move</span></div>
+          <div class="pv">
+            <div class="pv-title">Principal Variation</div>
+            <div id="pvText" class="pv-text"></div>
+          </div>
+          <div class="moves">
+            <div class="pv-title">Moves</div>
+            <ol id="moveList" class="move-list"></ol>
+          </div>
+        </aside>
+      </main>
+      <footer class="footer glass">
+        <span>Minority Report theme • Precog overlay shows AI line</span>
+      </footer>
+    </div>
+  </body>
+  </html>
